@@ -1120,12 +1120,25 @@
             </div>
             
             <div class="footer-bottom fade-in">
-                <p>&copy; 2023 UGC Premium. <span data-i18n="footer.rights">כל הזכויות שמורות.</span> | <span data-i18n="footer.designed">עוצב עם</span> <i class="fas fa-heart" style="color: #ffd700;"></i> <span data-i18n="footer.israel">בישראל</span></p>
+                <!-- בתוך ה-footer, לפני או אחרי ה-footer-bottom, הוסף את הדיב הבא -->
+                <div class="credits fade-in" style="text-align: center; margin-top: 20px;">
+                    <a href="https://mldk-tech.github.io/mldk-ai/" id="mldk-link" target="_blank" style="display: inline-flex; align-items: center; text-decoration: none; color: rgba(255,255,255,0.7); transition: var(--transition);">
+                    <span data-i18n="footer.credits">פותח על ידי MLDK.tech Chatbots for business</span> 
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=128,fit=crop,q=95/m5KlqeWWZvHyNox2/mldk_logo-mnlnD7ZD7vUEE3PR.jpeg" alt="MLDK.tech" style="height: 20px; margin: 0 5px;">
+                    </a>
+                </div>
+  
+                <p>&copy; 2025 MLDK.tech. <span data-i18n="footer.rights">כל הזכויות שמורות.</span> | <span data-i18n="footer.designed">עוצב עם</span> <i class="fas fa-heart" style="color: #ffd700;"></i> <span data-i18n="footer.israel">בישראל</span></p>
             </div>
         </div>
     </footer>
     
     <script>
+            // בתוך אובייקט התרגומים, הוסף:
+    translations.he["footer.credits"] = "נוצר על ידי";
+    translations.en["footer.credits"] = "Created by";
+  
+ 
         // תרגום דו-לשוני
         const translations = {
             he: {
@@ -1286,7 +1299,11 @@
                     element.textContent = translations[lang][key];
                 }
             });
+            const mldkLink = document.getElementById('mldk-link');
             
+            if (mldkLink) {
+                mldkLink.href = lang === 'he' ? 'https://mldk-tech.github.io/mldk-ai/' : 'https://mldk.tech';
+            }
             // עדכון כפתור בחירת שפה
             document.querySelector('.current-language').textContent = lang === 'he' ? 'עברית' : 'English';
             
