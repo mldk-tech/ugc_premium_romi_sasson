@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGC Premium - תוכן יוקרתי לעסקים גדולים | קידום במדיה</title>
+    <title>UGC Premium - Premium Content for Luxury Brands | Media Promotion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* איפוס סגנונות ופונטים */
@@ -36,6 +36,14 @@
             line-height: 1.7;
             overflow-x: hidden;
         }
+
+        body[dir="rtl"] {
+            text-align: right;
+        }
+
+        body[dir="ltr"] {
+            text-align: left;
+        }
         
         /* סגנונות כלליים */
         .container {
@@ -46,6 +54,55 @@
         
         .section-padding {
             padding: 100px 0;
+        }
+
+        /* סגנונות בחירת שפה */
+        .language-switcher {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .language-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .language-btn i {
+            margin-left: 5px;
+        }
+
+        .language-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--primary-dark);
+            border-radius: 5px;
+            padding: 10px;
+            min-width: 120px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1001;
+        }
+
+        .language-switcher:hover .language-options {
+            display: block;
+        }
+
+        .language-option {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            padding: 5px 10px;
+            transition: var(--transition);
+        }
+
+        .language-option:hover {
+            color: var(--accent-gold);
         }
         
         /* סגנונות ניווט */
@@ -554,87 +611,6 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
         
-        /* סגנונות צוות */
-        .team {
-            background: var(--light-bg);
-        }
-        
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .team-card {
-            background: var(--text-light);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            text-align: center;
-        }
-        
-        .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .team-img {
-            height: 300px;
-            overflow: hidden;
-        }
-        
-        .team-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .team-card:hover .team-img img {
-            transform: scale(1.05);
-        }
-        
-        .team-info {
-            padding: 30px;
-        }
-        
-        .team-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            color: var(--primary-dark);
-        }
-        
-        .team-info p {
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
-        .team-social {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .team-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--light-bg);
-            color: var(--primary-dark);
-            transition: var(--transition);
-        }
-        
-        .team-social a:hover {
-            background: var(--primary-blue);
-            color: var(--text-light);
-            transform: translateY(-5px);
-        }
-        
         /* סגנונות footer */
         .footer {
             background: var(--primary-dark);
@@ -893,6 +869,19 @@
                 justify-content: center;
             }
         }
+
+        /* סגנונות לשפה האנגלית */
+        body[dir="ltr"] .service-link i,
+        body[dir="ltr"] .footer-links a i {
+            margin-left: 5px;
+            margin-right: 0;
+            transform: rotate(180deg);
+        }
+
+        body[dir="ltr"] .instagram-btn i {
+            margin-right: 10px;
+            margin-left: 0;
+        }
     </style>
 </head>
 <body>
@@ -903,17 +892,30 @@
                 UGC Premium <i class="fas fa-crown"></i>
             </a>
             
+            <div class="nav-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="active" data-i18n="nav.home">בית</a></li>
+                    <li><a href="#services" data-i18n="nav.services">שירותים</a></li>
+                    <li><a href="#work" data-i18n="nav.work">עבודות</a></li>
+                    <li><a href="#about" data-i18n="nav.about">אודות</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">יצירת קשר</a></li>
+                </ul>
+
+                <div class="language-switcher">
+                    <button class="language-btn" id="languageBtn">
+                        <span class="current-language">עברית</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-options">
+                        <a href="#" class="language-option" data-lang="he">עברית</a>
+                        <a href="#" class="language-option" data-lang="en">English</a>
+                    </div>
+                </div>
+            </div>
+            
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
-            
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="active">בית</a></li>
-                <li><a href="#services">שירותים</a></li>
-                <li><a href="#work">עבודות</a></li>
-                <li><a href="#about">אודות</a></li>
-                <li><a href="#contact">יצירת קשר</a></li>
-            </ul>
         </div>
     </nav>
     
@@ -921,15 +923,15 @@
     <header class="hero" id="home">
         <div class="hero-content">
             <h1 class="fade-in">
-                <strong>קידום עסקי יוקרה</strong> <br> באמצעות תוכן איכותי
+                <strong data-i18n="hero.title1">קידום עסקי יוקרה</strong> <br> <span data-i18n="hero.title2">באמצעות תוכן איכותי</span>
             </h1>
-            <p class="fade-in delay-1">
+            <p class="fade-in delay-1" data-i18n="hero.subtitle">
                 יצירת תוכן UGC יוקרתי לעסקים גדולים, מותגי פרימיום ומוצרי יוקרה. 
                 אסטרטגיות מדיה מתקדמות להעצמת הנוכחות הדיגיטלית שלכם.
             </p>
             <div class="hero-btns fade-in delay-2">
-                <a href="#work" class="btn btn-primary">צפו בעבודות שלנו</a>
-                <a href="#contact" class="btn btn-secondary">לתיאום פגישה</a>
+                <a href="#work" class="btn btn-primary" data-i18n="hero.btn1">צפו בעבודות שלנו</a>
+                <a href="#contact" class="btn btn-secondary" data-i18n="hero.btn2">לתיאום פגישה</a>
             </div>
         </div>
     </header>
@@ -939,46 +941,46 @@
         <div class="container">
             <div class="video-grid">
                 <div class="video-card fade-in">
-                    <div class="video-badge">רכבי יוקרה</div>
+                    <div class="video-badge" data-i18n="work.badge1">רכבי יוקרה</div>
                     <div class="video-container">
                         <iframe src="https://www.instagram.com/reel/DGa9OTUIEB3/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                     </div>
                     <div class="video-info">
-                        <h3>קידום רכבי יוקרה</h3>
-                        <p>תוכן איכותי למותגים מובילים בתעשיית הרכב היוקרתי</p>
+                        <h3 data-i18n="work.title1">קידום רכבי יוקרה</h3>
+                        <p data-i18n="work.desc1">תוכן איכותי למותגים מובילים בתעשיית הרכב היוקרתי</p>
                         <div class="video-stats">
-                            <span><i class="far fa-eye"></i> 25K צפיות</span>
-                            <span><i class="far fa-heart"></i> 1.2K לייקים</span>
+                            <span><i class="far fa-eye"></i> <span data-i18n="work.views1">25K צפיות</span></span>
+                            <span><i class="far fa-heart"></i> <span data-i18n="work.likes1">1.2K לייקים</span></span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="video-card fade-in delay-1">
-                    <div class="video-badge">נדל"ן יוקרה</div>
+                    <div class="video-badge" data-i18n="work.badge2">נדל"ן יוקרה</div>
                     <div class="video-container">
                         <iframe src="https://www.instagram.com/reel/DE2p7RUIzaZ/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                     </div>
                     <div class="video-info">
-                        <h3>קידום פרויקטי נדל"ן</h3>
-                        <p>הצגת דירות יוקרה ופרויקטים נדל"ניים בלעדיים</p>
+                        <h3 data-i18n="work.title2">קידום פרויקטי נדל"ן</h3>
+                        <p data-i18n="work.desc2">הצגת דירות יוקרה ופרויקטים נדל"ניים בלעדיים</p>
                         <div class="video-stats">
-                            <span><i class="far fa-eye"></i> 18K צפיות</span>
-                            <span><i class="far fa-heart"></i> 950 לייקים</span>
+                            <span><i class="far fa-eye"></i> <span data-i18n="work.views2">18K צפיות</span></span>
+                            <span><i class="far fa-heart"></i> <span data-i18n="work.likes2">950 לייקים</span></span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="video-card fade-in delay-2">
-                    <div class="video-badge">תיירות פרימיום</div>
+                    <div class="video-badge" data-i18n="work.badge3">תיירות פרימיום</div>
                     <div class="video-container">
                         <iframe src="https://www.instagram.com/reel/DHdXsXWoozu/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                     </div>
                     <div class="video-info">
-                        <h3>מלונות יוקרה בדובאי</h3>
-                        <p>חווית תיירות פרימיום במלונות הבוטיק המובילים</p>
+                        <h3 data-i18n="work.title3">מלונות יוקרה בדובאי</h3>
+                        <p data-i18n="work.desc3">חווית תיירות פרימיום במלונות הבוטיק המובילים</p>
                         <div class="video-stats">
-                            <span><i class="far fa-eye"></i> 32K צפיות</span>
-                            <span><i class="far fa-heart"></i> 1.5K לייקים</span>
+                            <span><i class="far fa-eye"></i> <span data-i18n="work.views3">32K צפיות</span></span>
+                            <span><i class="far fa-heart"></i> <span data-i18n="work.likes3">1.5K לייקים</span></span>
                         </div>
                     </div>
                 </div>
@@ -991,19 +993,19 @@
         <div class="container stats-container">
             <div class="stat-item fade-in">
                 <div class="stat-number">150+</div>
-                <div class="stat-label">לקוחות מרוצים</div>
+                <div class="stat-label" data-i18n="stats.label1">לקוחות מרוצים</div>
             </div>
             <div class="stat-item fade-in delay-1">
                 <div class="stat-number">500+</div>
-                <div class="stat-label">סרטוני UGC</div>
+                <div class="stat-label" data-i18n="stats.label2">סרטוני UGC</div>
             </div>
             <div class="stat-item fade-in delay-2">
                 <div class="stat-number">10M+</div>
-                <div class="stat-label">צפיות מצטברות</div>
+                <div class="stat-label" data-i18n="stats.label3">צפיות מצטברות</div>
             </div>
             <div class="stat-item fade-in delay-3">
                 <div class="stat-number">100%</div>
-                <div class="stat-label">אנליטיקס מתקדמים</div>
+                <div class="stat-label" data-i18n="stats.label4">אנליטיקס מתקדמים</div>
             </div>
         </div>
     </section>
@@ -1012,8 +1014,8 @@
     <section class="services section-padding" id="services">
         <div class="container">
             <div class="section-title fade-in">
-                <h2>השירותים <strong>שלנו</strong></h2>
-                <p>אנו מציעים מגוון פתרונות תוכן ואסטרטגיות דיגיטל לעסקים יוקרתיים</p>
+                <h2 data-i18n="services.title">השירותים <strong>שלנו</strong></h2>
+                <p data-i18n="services.subtitle">אנו מציעים מגוון פתרונות תוכן ואסטרטגיות דיגיטל לעסקים יוקרתיים</p>
             </div>
             
             <div class="services-grid">
@@ -1021,36 +1023,36 @@
                     <div class="service-icon">
                         <i class="fas fa-video"></i>
                     </div>
-                    <h3>סרטוני UGC פרימיום</h3>
-                    <p>יצירת תוכן וידאו איכותי ומותאם אישית למותגי יוקרה ועסקים גדולים</p>
-                    <a href="#" class="service-link">למידע נוסף <i class="fas fa-chevron-left"></i></a>
+                    <h3 data-i18n="services.card1.title">סרטוני UGC פרימיום</h3>
+                    <p data-i18n="services.card1.desc">יצירת תוכן וידאו איכותי ומותאם אישית למותגי יוקרה ועסקים גדולים</p>
+                    <a href="#" class="service-link" data-i18n="services.learn">למידע נוסף <i class="fas fa-chevron-left"></i></a>
                 </div>
                 
                 <div class="service-card fade-in delay-1">
                     <div class="service-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>ניהול קמפיינים</h3>
-                    <p>אסטרטגיות מדיה מתקדמות וניהול קמפיינים ממוקדים לקהל יעד איכותי</p>
-                    <a href="#" class="service-link">למידע נוסף <i class="fas fa-chevron-left"></i></a>
+                    <h3 data-i18n="services.card2.title">ניהול קמפיינים</h3>
+                    <p data-i18n="services.card2.desc">אסטרטגיות מדיה מתקדמות וניהול קמפיינים ממוקדים לקהל יעד איכותי</p>
+                    <a href="#" class="service-link" data-i18n="services.learn">למידע נוסף <i class="fas fa-chevron-left"></i></a>
                 </div>
                 
                 <div class="service-card fade-in delay-2">
                     <div class="service-icon">
                         <i class="fas fa-bullhorn"></i>
                     </div>
-                    <h3>ייעוץ וליווי אישי</h3>
-                    <p>הדרכה וליווי צמוד לבעלי עסקים ומותגים יוקרתיים במדיה החברתית</p>
-                    <a href="#" class="service-link">למידע נוסף <i class="fas fa-chevron-left"></i></a>
+                    <h3 data-i18n="services.card3.title">ייעוץ וליווי אישי</h3>
+                    <p data-i18n="services.card3.desc">הדרכה וליווי צמוד לבעלי עסקים ומותגים יוקרתיים במדיה החברתית</p>
+                    <a href="#" class="service-link" data-i18n="services.learn">למידע נוסף <i class="fas fa-chevron-left"></i></a>
                 </div>
                 
                 <div class="service-card fade-in delay-3">
                     <div class="service-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
-                    <h3>אסטרטגיית תוכן</h3>
-                    <p>פיתוח תכנית תוכן שנתית מותאמת למותג ולקהל היעד היוקרתי</p>
-                    <a href="#" class="service-link">למידע נוסף <i class="fas fa-chevron-left"></i></a>
+                    <h3 data-i18n="services.card4.title">אסטרטגיית תוכן</h3>
+                    <p data-i18n="services.card4.desc">פיתוח תכנית תוכן שנתית מותאמת למותג ולקהל היעד היוקרתי</p>
+                    <a href="#" class="service-link" data-i18n="services.learn">למידע נוסף <i class="fas fa-chevron-left"></i></a>
                 </div>
             </div>
         </div>
@@ -1060,16 +1062,13 @@
     <section class="cta section-padding" id="contact">
         <div class="container">
             <div class="cta-container pulse-element">
-                <h2 class="fade-in">מוכנים לקחת את העסק שלכם <strong>לשלב הבא?</strong></h2>
-                <p class="fade-in delay-1">
+                <h2 class="fade-in" data-i18n="cta.title">מוכנים לקחת את העסק שלכם <strong>לשלב הבא?</strong></h2>
+                <p class="fade-in delay-1" data-i18n="cta.subtitle">
                     צרו איתנו קשר היום לגבי יצירת תוכן UGC יוקרתי לעסק שלכם או עקבו אחרינו באינסטגרם לעוד השראה.
                 </p>
-                <a href="https://www.instagram.com/romi_sasson/profilecard/" class="service-link">למידע נוסף <i class="fas fa-chevron-left"></i>
-
-                    <button class="instagram-btn fade-in delay-2">
-                        עקבו אחרינו באינסטגרם <i class="fab fa-instagram"></i>
-                    </button>
-                </a>
+                <button class="instagram-btn fade-in delay-2" id="instagramBtn">
+                    <span data-i18n="cta.button">עקבו אחרינו באינסטגרם</span> <i class="fab fa-instagram"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -1080,56 +1079,234 @@
             <div class="footer-grid">
                 <div class="footer-col fade-in">
                     <h3>UGC Premium</h3>
-                    <p>
+                    <p data-i18n="footer.about">
                         יצירת תוכן UGC איכותי ומותאם אישית לעסקים יוקרתיים ומותגי פרימיום. 
                         אנו מתמחים בקידום דיגיטלי לקהל יעד איכותי.
                     </p>
                     <div class="footer-social">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/romi_sasson/profilecard/"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-col fade-in delay-1">
-                    <h3>קישורים מהירים</h3>
+                    <h3 data-i18n="footer.links">קישורים מהירים</h3>
                     <ul class="footer-links">
-                        <li><a href="#home">בית <i class="fas fa-chevron-left"></i></a></li>
-                        <li><a href="#services">שירותים <i class="fas fa-chevron-left"></i></a></li>
-                        <li><a href="#work">עבודות <i class="fas fa-chevron-left"></i></a></li>
-                        <li><a href="#about">אודות <i class="fas fa-chevron-left"></i></a></li>
-                        <li><a href="#contact">יצירת קשר <i class="fas fa-chevron-left"></i></a></li>
+                        <li><a href="#home" data-i18n="nav.home">בית <i class="fas fa-chevron-left"></i></a></li>
+                        <li><a href="#services" data-i18n="nav.services">שירותים <i class="fas fa-chevron-left"></i></a></li>
+                        <li><a href="#work" data-i18n="nav.work">עבודות <i class="fas fa-chevron-left"></i></a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">יצירת קשר <i class="fas fa-chevron-left"></i></a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col fade-in delay-2">
-                    <h3>שירותים</h3>
+                    <h3 data-i18n="footer.services">שירותים</h3>
                     <ul class="footer-links">
-                        <li><a href="#">סרטוני UGC <i class="fas fa-chevron-left"></i></a></li>
-                        <li><a href="#">ניהול קמפיינים <i class="fas fa-chevron-left"></i></a></li>
-                        <li><a href="#">ייעוץ וליווי <i class="fas fa-chevron-left"></i></a></li>
-                        <li><a href="#">אסטרטגיית תוכן <i class="fas fa-chevron-left"></i></a></li>
-                        <li><a href="#">הדרכות עסקיות <i class="fas fa-chevron-left"></i></a></li>
+                        <li><a href="#" data-i18n="services.card1.title">סרטוני UGC <i class="fas fa-chevron-left"></i></a></li>
+                        <li><a href="#" data-i18n="services.card2.title">ניהול קמפיינים <i class="fas fa-chevron-left"></i></a></li>
+                        <li><a href="#" data-i18n="services.card3.title">ייעוץ וליווי <i class="fas fa-chevron-left"></i></a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col fade-in delay-3">
-                    <h3>יצירת קשר</h3>
+                    <h3 data-i18n="footer.contact">יצירת קשר</h3>
                     <ul class="footer-links">
                         <li><a href="mailto:romisasson@gmail.com">romisasson@gmail.com <i class="fas fa-envelope"></i></a></li>
-                        <li><a href="#">מודיעין, ישראל <i class="fas fa-map-marker-alt"></i></a></li>
+                        <li><a href="#" data-i18n="footer.location">מודיעין, ישראל <i class="fas fa-map-marker-alt"></i></a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom fade-in">
-                <p>&copy; 2023 UGC Premium. כל הזכויות שמורות. | עוצב עם <i class="fas fa-heart" style="color: #ffd700;"></i> בישראל</p>
+                <p>&copy; 2023 UGC Premium. <span data-i18n="footer.rights">כל הזכויות שמורות.</span> | <span data-i18n="footer.designed">עוצב עם</span> <i class="fas fa-heart" style="color: #ffd700;"></i> <span data-i18n="footer.israel">בישראל</span></p>
             </div>
         </div>
     </footer>
     
     <script>
+        // תרגום דו-לשוני
+        const translations = {
+            he: {
+                // ניווט
+                "nav.home": "בית",
+                "nav.services": "שירותים",
+                "nav.work": "עבודות",
+                "nav.about": "אודות",
+                "nav.contact": "יצירת קשר",
+                
+                // ראש הדף
+                "hero.title1": "קידום עסקי יוקרה",
+                "hero.title2": "באמצעות תוכן איכותי",
+                "hero.subtitle": "יצירת תוכן UGC יוקרתי לעסקים גדולים, מותגי פרימיום ומוצרי יוקרה. אסטרטגיות מדיה מתקדמות להעצמת הנוכחות הדיגיטלית שלכם.",
+                "hero.btn1": "צפו בעבודות שלנו",
+                "hero.btn2": "לתיאום פגישה",
+                
+                // עבודות
+                "work.badge1": "רכבי יוקרה",
+                "work.title1": "קידום רכבי יוקרה",
+                "work.desc1": "תוכן איכותי למותגים מובילים בתעשיית הרכב היוקרתי",
+                "work.views1": "25K צפיות",
+                "work.likes1": "1.2K לייקים",
+                
+                "work.badge2": "נדל\"ן יוקרה",
+                "work.title2": "קידום פרויקטי נדל\"ן",
+                "work.desc2": "הצגת דירות יוקרה ופרויקטים נדל\"ניים בלעדיים",
+                "work.views2": "18K צפיות",
+                "work.likes2": "950 לייקים",
+                
+                "work.badge3": "תיירות פרימיום",
+                "work.title3": "מלונות יוקרה בדובאי",
+                "work.desc3": "חווית תיירות פרימיום במלונות הבוטיק המובילים",
+                "work.views3": "32K צפיות",
+                "work.likes3": "1.5K לייקים",
+                
+                // סטטיסטיקות
+                "stats.label1": "לקוחות מרוצים",
+                "stats.label2": "סרטוני UGC",
+                "stats.label3": "צפיות מצטברות",
+                "stats.label4": "אנליטיקס מתקדמים",
+                
+                // שירותים
+                "services.title": "השירותים",
+                "services.subtitle": "אנו מציעים מגוון פתרונות תוכן ואסטרטגיות דיגיטל לעסקים יוקרתיים",
+                "services.learn": "למידע נוסף",
+                
+                "services.card1.title": "סרטוני UGC פרימיום",
+                "services.card1.desc": "יצירת תוכן וידאו איכותי ומותאם אישית למותגי יוקרה ועסקים גדולים",
+                
+                "services.card2.title": "ניהול קמפיינים",
+                "services.card2.desc": "אסטרטגיות מדיה מתקדמות וניהול קמפיינים ממוקדים לקהל יעד איכותי",
+                
+                "services.card3.title": "ייעוץ וליווי אישי",
+                "services.card3.desc": "הדרכה וליווי צמוד לבעלי עסקים ומותגים יוקרתיים במדיה החברתית",
+                
+                "services.card4.title": "אסטרטגיית תוכן",
+                "services.card4.desc": "פיתוח תכנית תוכן שנתית מותאמת למותג ולקהל היעד היוקרתי",
+                
+                // CTA
+                "cta.title": "מוכנים לקחת את העסק שלכם",
+                "cta.subtitle": "צרו איתנו קשר היום לגבי יצירת תוכן UGC יוקרתי לעסק שלכם או עקבו אחרינו באינסטגרם לעוד השראה.",
+                "cta.button": "עקבו אחרינו באינסטגרם",
+                
+                // פוטר
+                "footer.about": "יצירת תוכן UGC איכותי ומותאם אישית לעסקים יוקרתיים ומותגי פרימיום. אנו מתמחים בקידום דיגיטלי לקהל יעד איכותי.",
+                "footer.links": "קישורים מהירים",
+                "footer.services": "שירותים",
+                "footer.contact": "יצירת קשר",
+                "footer.location": "מודיעין, ישראל",
+                "footer.rights": "כל הזכויות שמורות.",
+                "footer.designed": "עוצב עם",
+                "footer.israel": "בישראל"
+            },
+            en: {
+                // ניווט
+                "nav.home": "Home",
+                "nav.services": "Services",
+                "nav.work": "Portfolio",
+                "nav.about": "About",
+                "nav.contact": "Contact",
+                
+                // ראש הדף
+                "hero.title1": "Premium Business Promotion",
+                "hero.title2": "Through Quality Content",
+                "hero.subtitle": "Creating premium UGC content for large businesses, premium brands and luxury products. Advanced media strategies to enhance your digital presence.",
+                "hero.btn1": "View Our Work",
+                "hero.btn2": "Schedule a Meeting",
+                
+                // עבודות
+                "work.badge1": "Luxury Cars",
+                "work.title1": "Luxury Car Promotion",
+                "work.desc1": "Quality content for leading brands in the luxury car industry",
+                "work.views1": "25K Views",
+                "work.likes1": "1.2K Likes",
+                
+                "work.badge2": "Luxury Real Estate",
+                "work.title2": "Real Estate Projects",
+                "work.desc2": "Showcasing luxury apartments and exclusive real estate projects",
+                "work.views2": "18K Views",
+                "work.likes2": "950 Likes",
+                
+                "work.badge3": "Premium Tourism",
+                "work.title3": "Luxury Hotels in Dubai",
+                "work.desc3": "Premium tourism experience at leading boutique hotels",
+                "work.views3": "32K Views",
+                "work.likes3": "1.5K Likes",
+                
+                // סטטיסטיקות
+                "stats.label1": "Satisfied Clients",
+                "stats.label2": "UGC Videos",
+                "stats.label3": "Total Views",
+                "stats.label4": "Advanced Analytics",
+                
+                // שירותים
+                "services.title": "Our",
+                "services.subtitle": "We offer a variety of content solutions and digital strategies for luxury businesses",
+                "services.learn": "Learn More",
+                
+                "services.card1.title": "Premium UGC Videos",
+                "services.card1.desc": "Creating high-quality, customized video content for luxury brands and large businesses",
+                
+                "services.card2.title": "Campaign Management",
+                "services.card2.desc": "Advanced media strategies and targeted campaign management for quality audiences",
+                
+                "services.card3.title": "Consulting & Mentoring",
+                "services.card3.desc": "Guidance and close mentoring for business owners and luxury brands in social media",
+                
+                "services.card4.title": "Content Strategy",
+                "services.card4.desc": "Development of an annual content plan tailored to the brand and luxury target audience",
+                
+                // CTA
+                "cta.title": "Ready to take your business",
+                "cta.subtitle": "Contact us today about creating premium UGC content for your business or follow us on Instagram for more inspiration.",
+                "cta.button": "Follow us on Instagram",
+                
+                // פוטר
+                "footer.about": "Creating quality, customized UGC content for luxury businesses and premium brands. We specialize in digital promotion for quality audiences.",
+                "footer.links": "Quick Links",
+                "footer.services": "Services",
+                "footer.contact": "Contact Us",
+                "footer.location": "Modi'in, Israel",
+                "footer.rights": "All rights reserved.",
+                "footer.designed": "Designed with",
+                "footer.israel": "in Israel"
+            }
+        };
+
+        // פונקציה להחלפת שפה
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+            
+            // עדכון טקסטים לפי שפה
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // עדכון כפתור בחירת שפה
+            document.querySelector('.current-language').textContent = lang === 'he' ? 'עברית' : 'English';
+            
+            // שמירת השפה בהעדפות המשתמש
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // טעינת שפה בהתאם להעדפות המשתמש
+        const preferredLanguage = localStorage.getItem('preferredLanguage') || 'he';
+        setLanguage(preferredLanguage);
+
+        // מאזין לאירועי בחירת שפה
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                setLanguage(lang);
+            });
+        });
+
         // ניווט נייד
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
@@ -1200,12 +1377,11 @@
                 });
             });
             
-            // אנימציה לכפתור אינסטגרם
-            const instagramBtn = document.querySelector('.instagram-btn');
+            // קישור לאינסטגרם
+            const instagramBtn = document.getElementById('instagramBtn');
             if (instagramBtn) {
                 instagramBtn.addEventListener('click', () => {
-                    // כאן יש להכניס את הקישור האמיתי לאינסטגרם שלך
-                    window.open('https://www.instagram.com/yourprofile', '_blank');
+                    window.open('https://www.instagram.com/romi_sasson/profilecard/', '_blank');
                 });
             }
             
